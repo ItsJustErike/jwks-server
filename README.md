@@ -31,6 +31,15 @@ python -m jwks_server
 
 Open the API documentation at <http://localhost:8080/docs>.
 
+## Key Storage
+
+The server stores generated private keys in
+`jwks_server/totally_not_my_privateKeys.db` and reuses them after a restart.
+The `/auth?expired=true` endpoint signs its token with a stored expired key;
+expired keys are not included in the published JWKS. The database is ignored by
+Git because it contains unencrypted private keys. Keep the database file
+protected and do not commit or share it.
+
 ## Run Tests
 
 Run the pytest suite with coverage:
